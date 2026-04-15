@@ -1,0 +1,887 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Measured Mission — Human-Centered Program Evaluation & Impact Consulting</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy:   #2C3E50;
+    --green:  #1A6B5A;
+    --green2: #1D9E75;
+    --mint:   #E8F4F0;
+    --cream:  #F9F7F4;
+    --text:   #2C3E50;
+    --muted:  #6B7280;
+    --white:  #ffffff;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 400;
+    color: var(--text);
+    background: var(--cream);
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: rgba(249,247,244,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(26,107,90,0.12);
+    padding: 0 5%;
+    height: 72px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+  }
+
+  .nav-mark {
+    width: 36px;
+    height: 36px;
+  }
+
+  .nav-wordmark {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 500;
+    font-size: 15px;
+    letter-spacing: 2px;
+    color: var(--navy);
+    text-transform: uppercase;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 36px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--muted);
+    letter-spacing: 0.5px;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--green); }
+
+  .nav-cta {
+    background: var(--green) !important;
+    color: var(--white) !important;
+    padding: 10px 22px;
+    border-radius: 4px;
+    font-weight: 500 !important;
+    transition: background 0.2s !important;
+  }
+
+  .nav-cta:hover { background: var(--green2) !important; color: var(--white) !important; }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding-top: 72px;
+  }
+
+  .hero-left {
+    background: var(--navy);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 80px 8% 80px 10%;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-left::before {
+    content: '';
+    position: absolute;
+    bottom: -60px; right: -60px;
+    width: 320px; height: 320px;
+    border-radius: 50%;
+    border: 1px solid rgba(29,158,117,0.2);
+  }
+
+  .hero-left::after {
+    content: '';
+    position: absolute;
+    bottom: -120px; right: -120px;
+    width: 500px; height: 500px;
+    border-radius: 50%;
+    border: 1px solid rgba(29,158,117,0.1);
+  }
+
+  .hero-eyebrow {
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--green2);
+    font-weight: 500;
+    margin-bottom: 28px;
+  }
+
+  .hero-headline {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(36px, 4vw, 58px);
+    font-weight: 900;
+    line-height: 1.1;
+    color: var(--white);
+    margin-bottom: 28px;
+  }
+
+  .hero-headline em {
+    font-style: italic;
+    color: var(--green2);
+  }
+
+  .hero-sub {
+    font-size: 16px;
+    line-height: 1.75;
+    color: rgba(255,255,255,0.7);
+    max-width: 420px;
+    margin-bottom: 48px;
+    font-weight: 300;
+  }
+
+  .hero-buttons {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    background: var(--green2);
+    color: var(--white);
+    padding: 14px 32px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    transition: background 0.2s, transform 0.15s;
+    display: inline-block;
+  }
+
+  .btn-primary:hover { background: #15875f; transform: translateY(-1px); }
+
+  .btn-ghost {
+    border: 1px solid rgba(255,255,255,0.3);
+    color: rgba(255,255,255,0.85);
+    padding: 14px 32px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: 0.5px;
+    transition: border-color 0.2s, color 0.2s;
+    display: inline-block;
+  }
+
+  .btn-ghost:hover { border-color: var(--green2); color: var(--green2); }
+
+  .hero-right {
+    background: var(--cream);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 80px 8%;
+    position: relative;
+  }
+
+  .hero-stat-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .stat-card {
+    background: var(--white);
+    border: 1px solid rgba(26,107,90,0.12);
+    border-radius: 8px;
+    padding: 28px 32px;
+    position: relative;
+    overflow: hidden;
+    animation: slideUp 0.6s ease both;
+  }
+
+  .stat-card:nth-child(1) { animation-delay: 0.1s; }
+  .stat-card:nth-child(2) { animation-delay: 0.25s; margin-left: 32px; }
+  .stat-card:nth-child(3) { animation-delay: 0.4s; }
+
+  .stat-card::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 3px;
+    background: var(--green2);
+  }
+
+  .stat-number {
+    font-family: 'Playfair Display', serif;
+    font-size: 42px;
+    font-weight: 700;
+    color: var(--navy);
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+
+  .stat-label {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.5;
+    font-weight: 400;
+  }
+
+  .stat-source {
+    font-size: 10px;
+    color: var(--green2);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-top: 8px;
+    font-weight: 500;
+  }
+
+  /* ── CHALLENGE STRIP ── */
+  .challenge-strip {
+    background: var(--green);
+    color: var(--white);
+    padding: 48px 10%;
+    display: flex;
+    align-items: center;
+    gap: 64px;
+  }
+
+  .challenge-quote {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(22px, 2.5vw, 34px);
+    font-weight: 700;
+    font-style: italic;
+    line-height: 1.3;
+    flex: 1;
+    border-left: 3px solid var(--green2);
+    padding-left: 32px;
+  }
+
+  .challenge-text {
+    flex: 1;
+    font-size: 15px;
+    line-height: 1.8;
+    color: rgba(255,255,255,0.82);
+    font-weight: 300;
+  }
+
+  /* ── SERVICES ── */
+  .services {
+    padding: 100px 10%;
+    background: var(--white);
+  }
+
+  .section-label {
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--green2);
+    font-weight: 500;
+    margin-bottom: 16px;
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(28px, 3vw, 44px);
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 16px;
+    line-height: 1.2;
+  }
+
+  .section-sub {
+    font-size: 16px;
+    color: var(--muted);
+    max-width: 560px;
+    line-height: 1.75;
+    margin-bottom: 64px;
+    font-weight: 300;
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2px;
+    background: rgba(26,107,90,0.08);
+  }
+
+  .service-item {
+    background: var(--white);
+    padding: 48px 40px;
+    transition: background 0.2s;
+    cursor: default;
+  }
+
+  .service-item:hover { background: var(--mint); }
+
+  .service-number {
+    font-family: 'Playfair Display', serif;
+    font-size: 56px;
+    font-weight: 900;
+    color: rgba(26,107,90,0.1);
+    line-height: 1;
+    margin-bottom: 16px;
+  }
+
+  .service-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 12px;
+    line-height: 1.3;
+  }
+
+  .service-desc {
+    font-size: 14px;
+    line-height: 1.75;
+    color: var(--muted);
+    font-weight: 300;
+  }
+
+  /* ── APPROACH ── */
+  .approach {
+    padding: 100px 10%;
+    background: var(--cream);
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: 80px;
+    align-items: start;
+  }
+
+  .approach-left { position: sticky; top: 120px; }
+
+  .approach-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .step {
+    display: grid;
+    grid-template-columns: 56px 1fr;
+    gap: 24px;
+    padding: 32px 0;
+    border-bottom: 1px solid rgba(26,107,90,0.1);
+  }
+
+  .step:last-child { border-bottom: none; }
+
+  .step-num {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--navy);
+    color: var(--white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 500;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .step-content h4 {
+    font-family: 'Playfair Display', serif;
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 8px;
+  }
+
+  .step-content p {
+    font-size: 14px;
+    line-height: 1.7;
+    color: var(--muted);
+    font-weight: 300;
+  }
+
+  /* ── TESTIMONIAL / MISSION BREAK ── */
+  .mission-break {
+    background: var(--navy);
+    padding: 100px 10%;
+    text-align: center;
+  }
+
+  .mission-break blockquote {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(24px, 3vw, 42px);
+    font-weight: 700;
+    font-style: italic;
+    color: var(--white);
+    max-width: 800px;
+    margin: 0 auto 24px;
+    line-height: 1.3;
+  }
+
+  .mission-break blockquote span { color: var(--green2); }
+
+  .mission-attribution {
+    font-size: 13px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.4);
+    font-weight: 400;
+  }
+
+  /* ── WHO WE SERVE ── */
+  .audience {
+    padding: 100px 10%;
+    background: var(--white);
+  }
+
+  .audience-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+    margin-top: 56px;
+  }
+
+  .audience-card {
+    border: 1px solid rgba(26,107,90,0.15);
+    border-radius: 8px;
+    padding: 36px 28px;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+
+  .audience-card:hover {
+    border-color: var(--green2);
+    transform: translateY(-4px);
+  }
+
+  .audience-icon {
+    width: 44px;
+    height: 44px;
+    background: var(--mint);
+    border-radius: 8px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .audience-icon svg { width: 22px; height: 22px; }
+
+  .audience-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 10px;
+  }
+
+  .audience-card p {
+    font-size: 14px;
+    line-height: 1.7;
+    color: var(--muted);
+    font-weight: 300;
+  }
+
+  /* ── PRICING SIGNAL ── */
+  .pricing-signal {
+    background: var(--mint);
+    padding: 72px 10%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 48px;
+    flex-wrap: wrap;
+  }
+
+  .pricing-signal h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(24px, 2.5vw, 36px);
+    font-weight: 700;
+    color: var(--navy);
+    max-width: 480px;
+    line-height: 1.3;
+  }
+
+  .pricing-signal p {
+    font-size: 15px;
+    line-height: 1.75;
+    color: var(--green);
+    max-width: 360px;
+    font-weight: 400;
+  }
+
+  /* ── CTA ── */
+  .cta-section {
+    padding: 120px 10%;
+    background: var(--cream);
+    text-align: center;
+  }
+
+  .cta-section h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(28px, 3.5vw, 52px);
+    font-weight: 900;
+    color: var(--navy);
+    margin-bottom: 20px;
+    line-height: 1.15;
+  }
+
+  .cta-section p {
+    font-size: 16px;
+    color: var(--muted);
+    max-width: 500px;
+    margin: 0 auto 48px;
+    line-height: 1.75;
+    font-weight: 300;
+  }
+
+  .cta-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .btn-dark {
+    background: var(--navy);
+    color: var(--white);
+    padding: 16px 40px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    transition: background 0.2s;
+    display: inline-block;
+  }
+
+  .btn-dark:hover { background: var(--green); }
+
+  .btn-outline-dark {
+    border: 1px solid var(--navy);
+    color: var(--navy);
+    padding: 16px 40px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 400;
+    letter-spacing: 0.5px;
+    transition: all 0.2s;
+    display: inline-block;
+  }
+
+  .btn-outline-dark:hover { background: var(--navy); color: var(--white); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--navy);
+    padding: 56px 10%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 24px;
+  }
+
+  .footer-left p {
+    font-size: 13px;
+    color: rgba(255,255,255,0.4);
+    margin-top: 8px;
+    font-weight: 300;
+  }
+
+  .footer-wordmark {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    color: var(--white);
+    text-transform: uppercase;
+  }
+
+  .footer-right {
+    font-size: 12px;
+    color: rgba(255,255,255,0.35);
+    text-align: right;
+    line-height: 1.8;
+    font-weight: 300;
+  }
+
+  .footer-right a {
+    color: rgba(255,255,255,0.35);
+    text-decoration: none;
+  }
+
+  .footer-right a:hover { color: var(--green2); }
+
+  /* ── ANIMATIONS ── */
+  @keyframes slideUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-left .hero-eyebrow  { animation: slideUp 0.5s ease 0.1s both; }
+  .hero-left .hero-headline { animation: slideUp 0.5s ease 0.2s both; }
+  .hero-left .hero-sub      { animation: slideUp 0.5s ease 0.3s both; }
+  .hero-left .hero-buttons  { animation: slideUp 0.5s ease 0.4s both; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    .hero { grid-template-columns: 1fr; }
+    .hero-right { padding: 60px 8%; }
+    .stat-card:nth-child(2) { margin-left: 0; }
+    .challenge-strip { flex-direction: column; gap: 32px; }
+    .approach { grid-template-columns: 1fr; }
+    .approach-left { position: static; }
+    .services-grid { grid-template-columns: 1fr; }
+    .audience-grid { grid-template-columns: 1fr; }
+    nav .nav-links { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#">
+    <svg class="nav-mark" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <marker id="arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+          <path d="M2 1L8 5L2 9" fill="none" stroke="#1D9E75" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </marker>
+      </defs>
+      <polygon fill="#2C3E50" points="10,100 28,100 28,36 60,68 92,36 92,100 110,100 110,20 60,52 10,20"/>
+      <path d="M8,92 Q34,68 60,56 Q86,44 113,30" fill="none" stroke="#1D9E75" stroke-width="3.5" stroke-linecap="round" marker-end="url(#arr)"/>
+      <circle cx="34" cy="74" r="4" fill="#1D9E75"/>
+      <circle cx="60" cy="58" r="4" fill="#1D9E75"/>
+      <circle cx="88" cy="43" r="4" fill="#1D9E75"/>
+    </svg>
+    <span class="nav-wordmark">Measured Mission</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#approach">Our Approach</a></li>
+    <li><a href="#audience">Who We Serve</a></li>
+    <li><a href="#contact" class="nav-cta">Get in Touch</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <p class="hero-eyebrow">Human-Centered Program Evaluation</p>
+    <h1 class="hero-headline">Your work matters.<br><em>Prove it.</em></h1>
+    <p class="hero-sub">When funders ask "what's the impact?" — you need more than participation numbers and anecdotes. Measured Mission helps non-profit leaders build the evidence that sustains funding, builds trust, and drives continuous improvement.</p>
+    <div class="hero-buttons">
+      <a href="#contact" class="btn-primary">Start a Conversation</a>
+      <a href="#services" class="btn-ghost">See How We Work</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-stat-stack">
+      <div class="stat-card">
+        <div class="stat-number">764</div>
+        <div class="stat-label">Colorado non-profit leaders identify sustainable funding as their most pressing challenge</div>
+        <div class="stat-source">Colorado Nonprofit Association · Nonprofit Connect Poll</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">10%</div>
+        <div class="stat-label">of non-profits currently measure impact at the business outcome level — the level funders actually care about</div>
+        <div class="stat-source">ROI Institute Benchmark Data</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">5×</div>
+        <div class="stat-label">more likely to secure renewed funding when organizations demonstrate quantified, credible program ROI</div>
+        <div class="stat-source">Sector Research</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CHALLENGE STRIP -->
+<section class="challenge-strip">
+  <div class="challenge-quote">"We know our programs work. We just can't prove it in a way funders believe."</div>
+  <div class="challenge-text">
+    This is the most common thing we hear from non-profit leaders. The gap between doing good work and demonstrating measurable value is real — and it's costing organizations funding, influence, and credibility. Measured Mission exists to close that gap.
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="section-label">What We Do</div>
+  <h2 class="section-title">From outputs to outcomes —<br>here's how we help.</h2>
+  <p class="section-sub">We work alongside your team to build evaluation systems that are rigorous, credible, and human-centered. No cookie-cutter frameworks. No jargon. Just clear evidence of the work you're already doing.</p>
+
+  <div class="services-grid">
+    <div class="service-item">
+      <div class="service-number">01</div>
+      <div class="service-title">Connect Programs to Real-World Impact</div>
+      <div class="service-desc">We guide you through a structured evaluation process that links your day-to-day work to the outcomes your funders, boards, and communities care about most — without losing the soul of your mission.</div>
+    </div>
+    <div class="service-item">
+      <div class="service-number">02</div>
+      <div class="service-title">Make Your Impact Credible & Quantifiable</div>
+      <div class="service-desc">Using the ROI Methodology® — a globally recognized 12-step framework — we help you design evaluations from the ground up, isolate program effects, and convert impact to monetary value where appropriate.</div>
+    </div>
+    <div class="service-item">
+      <div class="service-number">03</div>
+      <div class="service-title">Close the Gap Between Good Work and Compelling Proof</div>
+      <div class="service-desc">We translate your mission-driven effort into evidence that funders find credible and boards find actionable — turning your program data into your strongest funding argument.</div>
+    </div>
+    <div class="service-item">
+      <div class="service-number">04</div>
+      <div class="service-title">Tell the Story That Matters</div>
+      <div class="service-desc">We help you communicate results to the audiences that matter most — funders, boards, community partners, and the public — in formats they'll actually understand and act on.</div>
+    </div>
+  </div>
+</section>
+
+<!-- APPROACH -->
+<section class="approach" id="approach">
+  <div class="approach-left">
+    <div class="section-label">Our Approach</div>
+    <h2 class="section-title">Rigorous.<br>Human-centered.<br>Built for your reality.</h2>
+    <p style="font-size:15px; line-height:1.8; color:var(--muted); margin-top:20px; font-weight:300;">
+      We use the ROI Methodology® — a 12-step, evidence-based framework trusted by over 6,000 organizations in 70+ countries — adapted for the unique context of mission-driven non-profits. We bring more than a decade of experience in program design, evaluation, and data science to every engagement.
+    </p>
+  </div>
+  <div class="approach-steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-content">
+        <h4>Align to your mission and business need</h4>
+        <p>We start by understanding what success looks like for your organization — not just programmatically, but strategically. What measures matter to your funders? What's the real problem you're solving?</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-content">
+        <h4>Design the right evaluation</h4>
+        <p>We build a data collection and analysis plan tailored to your program, your capacity, and your audience — setting objectives at every level from participant reaction to long-term impact.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-content">
+        <h4>Collect and isolate real impact</h4>
+        <p>We help you gather the right data and — critically — isolate the effects of your program from other factors. This is the step most organizations skip, and the one funders are increasingly demanding.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">4</div>
+      <div class="step-content">
+        <h4>Convert impact to credible evidence</h4>
+        <p>Where appropriate, we convert program outcomes to monetary value using defensible, transparent methods — giving you a clear ROI figure you can present with confidence.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">5</div>
+      <div class="step-content">
+        <h4>Communicate and optimize</h4>
+        <p>We help you tell the story — to funders, boards, and stakeholders — and use the findings to continuously improve. Better data leads to better programs leads to better outcomes.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MISSION BREAK -->
+<section class="mission-break">
+  <blockquote>"A world where mission-driven organizations never have to guess at their value — <span>because the evidence speaks for itself.</span>"</blockquote>
+  <p class="mission-attribution">Measured Mission · Our Vision</p>
+</section>
+
+<!-- AUDIENCE -->
+<section class="audience" id="audience">
+  <div class="section-label">Who We Serve</div>
+  <h2 class="section-title">Built for non-profit leaders<br>who are ready for better answers.</h2>
+
+  <div class="audience-grid">
+    <div class="audience-card">
+      <div class="audience-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#1A6B5A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+          <circle cx="9" cy="7" r="4"/>
+          <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+          <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+        </svg>
+      </div>
+      <h3>Executive Directors & CEOs</h3>
+      <p>You need to demonstrate value to funders and boards while managing a team with limited capacity. We build evaluation systems that work within your real constraints.</p>
+    </div>
+    <div class="audience-card">
+      <div class="audience-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#1A6B5A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="2" y="3" width="20" height="14" rx="2"/>
+          <path d="M8 21h8M12 17v4"/>
+        </svg>
+      </div>
+      <h3>Program Directors & Managers</h3>
+      <p>You're closest to the work and know it's making a difference. We help you build the systems to prove it — in ways that resonate with leadership, funders, and your community.</p>
+    </div>
+    <div class="audience-card">
+      <div class="audience-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#1A6B5A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="20" x2="18" y2="10"/>
+          <line x1="12" y1="20" x2="12" y2="4"/>
+          <line x1="6"  y1="20" x2="6"  y2="14"/>
+        </svg>
+      </div>
+      <h3>Development & Grants Teams</h3>
+      <p>Strong proposals need strong evidence. We help you build the impact data infrastructure that turns grant applications from hopeful narratives into compelling, data-backed cases.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING SIGNAL -->
+<section class="pricing-signal">
+  <h2>Flexible, mission-aligned pricing — because impact shouldn't be out of reach.</h2>
+  <p>We know no two non-profits operate with the same resources. Our engagements are structured to meet you where you are — whether you're a grassroots organization or a regional anchor institution.</p>
+  <a href="#contact" class="btn-primary" style="white-space:nowrap; flex-shrink:0;">Let's Talk Scope</a>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="contact">
+  <h2>Ready to close the gap?</h2>
+  <p>Start with a conversation. We'll learn about your organization, your programs, and where you want to go — and we'll tell you honestly whether we're the right fit.</p>
+  <div class="cta-buttons">
+    <a href="mailto:info@measuredmission.com" class="btn-dark">Email Us Directly</a>
+    <a href="#" class="btn-outline-dark">Schedule a Call</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-left">
+    <div class="footer-wordmark">Measured Mission</div>
+    <p>Human-Centered Program Evaluation & Impact Consulting</p>
+    <p style="margin-top:6px;">ROI Methodology® is a registered trademark of ROI Institute, Inc.</p>
+  </div>
+  <div class="footer-right">
+    <a href="mailto:info@measuredmission.com">info@measuredmission.com</a><br>
+    measuredmission.com<br>
+    Colorado, USA<br><br>
+    © 2026 Measured Mission
+  </div>
+</footer>
+
+</body>
+</html>
