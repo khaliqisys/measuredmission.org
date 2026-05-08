@@ -183,19 +183,26 @@
   .btn-primary:hover { background: #15875f; transform: translateY(-1px); }
 
   .btn-ghost {
-    border: 1px solid rgba(255,255,255,0.3);
-    color: rgba(255,255,255,0.85);
+    border: 1px solid rgba(255,255,255,0.4);
+    color: rgba(255,255,255,0.9);
+    background: transparent;
     padding: 14px 32px;
     border-radius: 4px;
     text-decoration: none;
     font-size: 14px;
     font-weight: 400;
     letter-spacing: 0.5px;
-    transition: border-color 0.2s, color 0.2s;
+    transition: background 0.2s, border-color 0.2s, color 0.2s, transform 0.15s;
     display: inline-block;
+    cursor: pointer;
   }
 
-  .btn-ghost:hover { border-color: var(--green2); color: var(--green2); }
+  .btn-ghost:hover {
+    background: rgba(29,158,117,0.18);
+    border-color: var(--green2);
+    color: var(--white);
+    transform: translateY(-1px);
+  }
 
   .hero-right {
     background: var(--cream);
@@ -798,7 +805,7 @@
     </div>
   </div>
   <div class="about-right">
-    <p>David founded Measured Mission after more than two decades on the other side of the table — building, leading, and evaluating mission-driven programs from the inside. As Executive Director of Data Science for Colorado Springs School District 11, he leads analytics, predictive modeling, and accountability reporting across a multi-million dollar portfolio, applying machine learning, multi-level modeling, and visual analytics to questions of student outcomes, equity, and program effectiveness.</p>
+    <p>David founded Measured Mission after more than two decades on the other side of the table — building, leading, and evaluating mission-driven programs from the inside. As Executive Director of Data Science for Colorado Springs School District 11, he led analytics, predictive modeling, and accountability reporting across a multi-million dollar portfolio, applying machine learning, multi-level modeling, and visual analytics to questions of student outcomes, equity, and program effectiveness.</p>
     <p>Earlier, David served as Co-Principal Investigator on a National Science Foundation Louis Stokes Alliance grant spanning 15 universities and 4 Native American tribes, and directed a multi-million dollar Air Force Office of Scientific Research grant — securing additional competitive funding along the way. He's managed federal, state, foundation, and corporate grants, written the quarterly reports, sat across the table from program officers, and answered the hardest version of <em>"what's the impact?"</em> His program evaluation research has been published in peer-reviewed journals, and he holds a Ph.D. in Educational Leadership, Research, and Policy from the University of Colorado Colorado Springs.</p>
     <p>Outside of work, you'll find him birding Colorado's high country, riding gravel and singletrack, building furniture in his woodshop, or playing guitar.</p>
   </div>
